@@ -9,12 +9,21 @@ const Title = () => {
     setNewTitleText(e.target.value);
   };
 
+  const handleEditing = () => {
+    setEditing(!editing);
+  }
+
+  const handleFormSubmit = () => {
+    setTitle(newTitleText);
+    setEditing(false);
+  }
+
   return (
     <div>
       {!editing ? (
         <h1>
           {title}{' '}
-          <i onClick={() => setEditing(!editing)} className="far fa-edit" />
+          <i onClick={handleEditing} className="far fa-edit" />
         </h1>
       ) : (
         <div>
@@ -26,10 +35,7 @@ const Title = () => {
             onChange={handleChanges}
           />
           <button
-            onClick={() => {
-              setTitle(newTitleText);
-              setEditing(false);
-            }}
+            onClick={handleFormSubmit}
           >
             Update title
           </button>
