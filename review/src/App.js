@@ -2,7 +2,6 @@ import React, { useReducer } from "react";
 import reducer from './reducers/calcReducer';
 import "./styles.css";
 
-
 export default function App() {
   return (
     <div className="App">
