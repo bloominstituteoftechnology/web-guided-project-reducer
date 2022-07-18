@@ -1,21 +1,32 @@
 import React, { useState, useReducer } from 'react';
+import reducer from '../reducers/titleReducer';
+import actions from '../actions/titleActions';
 
+const initialState = {
+  title: "Hello earthlings!",
+  editing: false,
+  newTitleText: ''
+}
 const Title = () => {
-  const [title, setTitle] = useState('Hello earthlings!');
-  const [editing, setEditing] = useState(false);
-  const [newTitleText, setNewTitleText] = useState('');
+  // const [title, setTitle] = useState('Hello earthlings!');
+  // const [editing, setEditing] = useState(false);
+  // const [newTitleText, setNewTitleText] = useState('');
+
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const { title, editing, newTitleText } = state;
+  const {setTitle, setEditing, setNewTitleText } = actions;
 
   const handleChanges = e => {
-    setNewTitleText(e.target.value);
+    dispatch(setNewTitleText(e.target.value));
   };
 
   const handleEditing = () => {
-    setEditing(!editing);
+    dispatch(setEditing(!editing));
   }
 
   const handleFormSubmit = () => {
-    setTitle(newTitleText);
-    setEditing(false);
+    dispatch(setTitle(newTitleText));
+    dispatch(setEditing(false));
   }
 
   return (
